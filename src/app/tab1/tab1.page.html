@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,47 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segmentModel" value="all">
+      <ion-segment-button value="all">All</ion-segment-button>
+      <ion-segment-button value="favorites">Favorites</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-card *ngIf="segmentModel === 'all'">
+    <ion-card-header>
+      <img src="../../assets/photos/85088218_1478658085636480_829227489002782720_o.jpg" >
+      <ion-card-subtitle>Clément</ion-card-subtitle>
+      <ion-card-title>Beer Pong</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Ce jeu d'adresse des temps romains a réuni tant de joueurs professionnels que d'amis autour d'une même table pour partager un bon moment
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="segmentModel === 'favorites'" >
+    <ion-button (click)="refreshStorage()">
+      <ion-icon slot="icon-only" name="refresh"></ion-icon>
+    </ion-button>
+    <ion-button (click)="deleteStorage()">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let fav of favs">
+        <ion-card-header>
+          <img [src]="fav.url">
+          <ion-card-subtitle>{{fav.author}}</ion-card-subtitle>
+          <ion-card-title>{{fav.title}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+         {{fav.description}}
+        </ion-card-content>
+      
+    </ion-card>
+  </ion-card>
 </ion-content>
