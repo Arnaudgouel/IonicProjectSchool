@@ -33,23 +33,6 @@
     </ion-card-content>
   </ion-card>
   <ion-card *ngIf="segmentModel === 'favorites'" >
-    <ion-button (click)="refreshStorage()">
-      <ion-icon slot="icon-only" name="refresh"></ion-icon>
-    </ion-button>
-    <ion-button (click)="deleteStorage()">
-      <ion-icon slot="icon-only" name="trash"></ion-icon>
-    </ion-button>
-    <ion-card *ngFor="let fav of favs">
-        <ion-card-header>
-          <img [src]="fav.url">
-          <ion-card-subtitle>{{fav.author}}</ion-card-subtitle>
-          <ion-card-title>{{fav.title}}</ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-         {{fav.description}}
-        </ion-card-content>
-      
-    </ion-card>
+    <app-list-item *ngFor="let fav of favs" [img]="fav"></app-list-item>
   </ion-card>
 </ion-content>

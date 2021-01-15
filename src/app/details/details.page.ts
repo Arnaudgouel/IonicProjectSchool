@@ -25,6 +25,8 @@ export class DetailsPage implements OnInit {
   // Le tableau des favoris est vide au départ
   favorites = [];
 
+  addedToFav = false;
+
   async addToFavorite(){
     // console.log(this.favorites);
     
@@ -32,16 +34,21 @@ export class DetailsPage implements OnInit {
     this.favorites = data ? data : [];
     this.favorites.push(this.photoDetails);
     this.favoritesStorage.setFavPhotos(this.favorites);
+    this.addedToFav = true;
     // console.log(this.storage.get('Favorite'));
 
   }
 
-  // getFavorite(){
-  //   this.favorites=(this.storage.get('Favorite'));
-  // }
+  async removeFromFavorite(id){
+    const index = await this.favoritesStorage.getFavById(id);
+    const data = await this.favoritesStorage.getFavPhotos();
+    data.splice(index, 1);
+    this.favoritesStorage.setFavPhotos(data);
+    this.addedToFav = false;
+    console.log("Removed from fav", data);
+  }
 
   ngOnInit() {
-    // this.getFavorite();
     this.activatedRoute.params.subscribe( (params) =>  {
 
       // On recherche l'index du tableau de photo orrespondant à l'id récupéré en paramètre
@@ -51,7 +58,8 @@ export class DetailsPage implements OnInit {
       this.photoDetails = this.photoService.data[this.photoIndex];
 
       this.favoritesStorage.getFavById(params.id).then((index) =>{
-        console.log('La photo est dans les favoris :?' + index)
+        console.log('La photo est dans les favoris :?' + index);
+        if (index !=-1){this.addedToFav = true;}
       });
     });
   }

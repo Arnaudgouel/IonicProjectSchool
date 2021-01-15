@@ -22,10 +22,10 @@
   <ion-button expand="full" routerLink="/tabs/tab2">
     Retour à la liste
   </ion-button>
-  <ion-button expand="full" color="danger" (click)="addToFavorite()">
+  <ion-button *ngIf="!addedToFav" expand="full" color="danger" (click)="addToFavorite()">
     Ajouter aux favoris
   </ion-button>
-  <ion-button expand="full" color="tertiary">
+  <ion-button *ngIf="addedToFav" expand="full" color="tertiary" (click)="removeFromFavorite(photoDetails.id)">
     Retirer des favoris
   </ion-button>
 

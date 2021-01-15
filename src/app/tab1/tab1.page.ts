@@ -30,6 +30,7 @@ export class Tab1Page implements OnInit {
 
   ionViewWillEnter(){
     this.favoritesStorage.getFavPhotos().then( (data) =>{
+      this.favs = data;
       console.log("ionViewWillEnter " + data);
     });
   }
