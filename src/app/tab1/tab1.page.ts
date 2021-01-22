@@ -8,9 +8,16 @@ import { FavoritesService } from '../services/favorites.service';
 })
 export class Tab1Page implements OnInit {
 
-  segmentModel = "all";
+  segmentModel = "accueil";
 
   favs = [];
+
+  accueil = {
+    title: 'Fire',
+    author: 'Robert D. Johnson',
+    url:'../../assets/photos/fire-4892711_1920.jpg',
+    description:''
+  }
 
   constructor(private favoritesStorage: FavoritesService) {}
 

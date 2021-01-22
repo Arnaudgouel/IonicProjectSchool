@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
       Photos
     </ion-title>
@@ -14,6 +17,15 @@
   </ion-header>
 
   <ion-list>
-    <app-list-item *ngFor="let img of photoList" [img]="img"></app-list-item>
+    <ion-item-sliding *ngFor="let img of photoList">
+      <ion-item-options side="start">
+        <ion-item-option color="primary">Favorite</ion-item-option>
+      </ion-item-options>
+      <app-list-item [img]="img"></app-list-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger">Favorite</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
   </ion-list>
 </ion-content>

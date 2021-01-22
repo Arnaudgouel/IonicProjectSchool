@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
       Home
     </ion-title>
@@ -15,21 +18,21 @@
 
 
   <ion-toolbar>
-    <ion-segment [(ngModel)]="segmentModel" value="all">
-      <ion-segment-button value="all">All</ion-segment-button>
-      <ion-segment-button value="favorites">Favorites</ion-segment-button>
+    <ion-segment [(ngModel)]="segmentModel" value="accueil">
+      <ion-segment-button value="accueil">Accueil</ion-segment-button>
+      <ion-segment-button value="favorites">Posters favoris</ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
-  <ion-card *ngIf="segmentModel === 'all'">
+  <ion-card *ngIf="segmentModel === 'accueil'">
     <ion-card-header>
-      <img src="../../assets/photos/85088218_1478658085636480_829227489002782720_o.jpg" >
-      <ion-card-subtitle>Clément</ion-card-subtitle>
-      <ion-card-title>Beer Pong</ion-card-title>
+      <img [src]="accueil.url" >
+      <ion-card-subtitle>{{accueil.author}}</ion-card-subtitle>
+      <ion-card-title>{{accueil.title}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      Ce jeu d'adresse des temps romains a réuni tant de joueurs professionnels que d'amis autour d'une même table pour partager un bon moment
+      {{accueil.description}}
     </ion-card-content>
   </ion-card>
   <ion-card *ngIf="segmentModel === 'favorites'" >

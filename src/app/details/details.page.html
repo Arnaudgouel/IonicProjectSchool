@@ -1,23 +1,29 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Détails</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <img width="100%" [src]="photoDetails.url" />
-    <ion-card-header>
-      <ion-card-subtitle>{{photoDetails.author}}</ion-card-subtitle>
-      <ion-card-title>{{photoDetails.title}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      {{photoDetails.description}}
-    </ion-card-content>
-  </ion-card>
+  <ion-slides #slides pager="true" [options]="slideOpts" (ionSlideDidChange)="ionSlideDidChange()">
+    <ion-slide *ngFor="let photo of photoList">
+      <ion-card style="width: 100%;">
+        <img width="100%" [src]="photo.url" />
+        <ion-card-header>
+          <ion-card-subtitle>{{photo.author}}</ion-card-subtitle>
+          <ion-card-title>{{photo.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{photo.description}}
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  
 
   <ion-button expand="full" routerLink="/tabs/tab2">
     Retour à la liste
